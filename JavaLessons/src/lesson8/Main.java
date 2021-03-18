@@ -2,7 +2,8 @@ package lesson8;
 
 public class Main {
     public static void main(String[] args) {
-
+ int e = new int[4][8].length;
+        System.out.println(e);
         Cat cat = new Cat("Мурзик", 50, 30);
         Person person = new Person("Игорь", 30, 15);
         Robot robot = new Robot("Tod", 100, 20);

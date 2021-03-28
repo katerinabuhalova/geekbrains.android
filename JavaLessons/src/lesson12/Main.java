@@ -8,7 +8,11 @@ public class Main {
     public static void main(String[] args) {
         float[] arr = new float[SIZE];
         createArray(arr);
-        createArray2(arr);
+        try {
+            createArray2(arr);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void createArray(float[] arr) {
@@ -26,7 +30,7 @@ public class Main {
         System.out.println(endTime - startTime);
     }
 
-    public static void createArray2(float[] arr) {
+    public static void createArray2(float[] arr) throws InterruptedException {
         float[] arr1 = new float[HALF];
         float[] arr2 = new float[HALF];
         for (int i = 0; i < arr.length; i++) {
@@ -38,17 +42,22 @@ public class Main {
         System.arraycopy(arr, 0, arr1, 0, HALF);
         System.arraycopy(arr, HALF, arr2, 0, HALF);
 
-        new Thread(() -> {
+      Thread thread1 = new Thread(() -> {
             for (int i = 0; i < HALF; i++) {
                 arr1[i] = (float) (arr1[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
             }
-        }).start();
+        });
+        thread1.start();
 
-        new Thread(() -> {
+       Thread thread2 = new Thread(() -> {
             for (int i = 0; i < HALF; i++) {
                 arr2[i] = (float) (arr2[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
             }
-        }).start();
+        });
+       thread2.start();
+
+       thread1.join();
+       thread2.join();
 
         System.arraycopy(arr1, 0, arr, 0, HALF);
         System.arraycopy(arr2, 0, arr, HALF, HALF);

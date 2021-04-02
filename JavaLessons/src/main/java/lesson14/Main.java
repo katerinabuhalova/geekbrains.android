@@ -6,14 +6,11 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         int[] arr = {1, 2, 7, 9, 6, 8};
-        int[] arr2 = {1, 1, 4, 3, 6};
-        int[] arr3 = {1, 1, 4, 4 };
         try {
             System.out.println(Arrays.toString(returnNewArray(arr)));
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             e.printStackTrace();
         }
-
     }
 
     public static int[] returnNewArray(int[] arr) throws RuntimeException {
@@ -25,21 +22,17 @@ public class Main {
                 return newArray;
             }
         }
-
         throw new RuntimeException();
-
-
     }
-
 
     public static boolean checkNumber(int[] arr) {
         boolean hasOne = false;
         boolean hasFore = false;
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == 1){
+            if (arr[i] == 1) {
                 hasOne = true;
             }
-            if(arr[i] == 4) {
+            if (arr[i] == 4) {
                 hasFore = true;
             }
         }
